@@ -6,20 +6,17 @@
   <title>Edition Sports Cards</title>
   <style>
     :root {
-      --bg: #0f1822;
-      --bg-soft: #172331;
-      --bg-deep: #0b1119;
-      --panel: rgba(255, 255, 255, 0.055);
-      --panel-strong: rgba(255, 255, 255, 0.085);
+      --bg: #0b1119;
+      --bg-soft: #101820;
+      --panel: rgba(18, 27, 37, 0.88);
       --text: #f4f7fb;
       --muted: #aeb8c4;
       --faint: #738192;
-      --accent: #d8a04f;
-      --accent-soft: rgba(216, 160, 79, 0.14);
-      --accent-border: rgba(216, 160, 79, 0.22);
-      --border: rgba(214, 224, 235, 0.14);
-      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
-      --radius: 24px;
+      --accent: #d8923a;
+      --accent-soft: rgba(216, 146, 58, 0.12);
+      --accent-border: rgba(216, 146, 58, 0.22);
+      --border: rgba(214, 224, 235, 0.12);
+      --shadow: 0 18px 55px rgba(0, 0, 0, 0.38);
     }
 
     * {
@@ -28,19 +25,15 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(124, 145, 164, 0.18), transparent 32rem),
-        radial-gradient(circle at top right, rgba(45, 63, 81, 0.28), transparent 34rem),
-        linear-gradient(180deg, #101a25 0%, #172331 48%, #0b1119 100%);
+        radial-gradient(circle at top left, rgba(124, 145, 164, 0.14), transparent 30rem),
+        radial-gradient(circle at top right, rgba(45, 63, 81, 0.22), transparent 34rem),
+        linear-gradient(180deg, #101820 0%, #0b1119 100%);
       color: var(--text);
       min-height: 100vh;
-      line-height: 1.55;
+      line-height: 1.45;
     }
 
     a {
@@ -54,383 +47,268 @@
     }
 
     .site-shell {
-      width: min(1220px, calc(100% - 32px));
+      width: min(1160px, calc(100% - 28px));
       margin: 0 auto;
     }
 
     .nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(20px);
-      background: rgba(15, 24, 34, 0.84);
       border-bottom: 1px solid var(--border);
+      background: rgba(11, 17, 25, 0.88);
+      backdrop-filter: blur(18px);
     }
 
     .nav-inner {
-      width: min(1220px, calc(100% - 32px));
+      width: min(1160px, calc(100% - 28px));
       margin: 0 auto;
-      padding: 16px 0;
+      padding: 18px 0;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 18px;
+      justify-content: flex-start;
     }
 
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       font-weight: 800;
       letter-spacing: -0.04em;
+      transition: transform 180ms ease, opacity 180ms ease;
     }
 
-    .brand-mark {
-      width: 40px;
-      height: 40px;
-      border-radius: 14px;
+    .brand:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    .brand-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, #f7b24d, #d67d12 58%, #8d4f05);
+      box-shadow:
+        0 0 0 1px rgba(216, 146, 58, 0.14),
+        0 0 28px rgba(216, 146, 58, 0.18);
+      flex-shrink: 0;
+    }
+
+    .brand-avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, #607588, #1f2d3c);
-      box-shadow: 0 0 34px rgba(143, 163, 184, 0.24);
-      font-size: 0.95rem;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255, 192, 92, 0.16), transparent 40%),
+        linear-gradient(180deg, #23170a 0%, #120d07 100%);
+      color: #ff9d1f;
+      font-size: 1.08rem;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .brand-name {
-      font-size: 1.05rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .nav-links a {
-      padding: 9px 12px;
-      border-radius: 999px;
-      transition: 180ms ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .hero {
-      padding: 74px 0 54px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.95fr);
-      gap: 38px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 8px 12px;
-      border: 1px solid rgba(216, 160, 79, 0.24);
-      color: var(--accent);
-      background: rgba(216, 160, 79, 0.08);
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      font-size: clamp(2.9rem, 7vw, 6rem);
-      line-height: 0.92;
-      letter-spacing: -0.075em;
-      max-width: 720px;
-    }
-
-    .hero-copy {
-      color: var(--muted);
-      font-size: 1.12rem;
-      max-width: 680px;
-      margin-top: 24px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .btn {
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text);
-      padding: 12px 18px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 750;
-      transition: 180ms ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.13);
-    }
-
-    .btn-primary {
-      border-color: rgba(216, 160, 79, 0.34);
-      background: linear-gradient(135deg, #617588, #253546);
-      box-shadow: 0 18px 45px rgba(31, 45, 60, 0.34);
-    }
-
-    .featured-panel {
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
-        radial-gradient(circle at top left, rgba(127,147,168,0.16), transparent 28rem);
-      box-shadow: var(--shadow);
-      padding: 22px;
-    }
-
-    .featured-label {
-      color: var(--accent);
-      font-size: 0.78rem;
+      font-size: 1rem;
       font-weight: 850;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
+      color: #ff9d1f;
+      line-height: 1.05;
     }
 
-    .featured-images {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 18px;
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.01em;
     }
 
-    .featured-image-frame {
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      background:
-        radial-gradient(circle at 50% 35%, rgba(216,195,138,0.16), transparent 35%),
-        linear-gradient(145deg, #223242, #101923 70%, #0a1119);
-      padding: 14px;
-      min-height: 250px;
-      display: grid;
-      place-items: center;
+    .page-header {
+      padding: 34px 0 22px;
     }
 
-    .featured-image-frame img {
-      max-height: 320px;
-      object-fit: contain;
-      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.45));
-    }
-
-    .section {
-      padding: 50px 0;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 24px;
-      margin-bottom: 22px;
-    }
-
-    .section-kicker {
+    .page-kicker {
       color: var(--accent);
       font-weight: 850;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       margin-bottom: 8px;
     }
 
-    h2 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
       line-height: 0.98;
-      letter-spacing: -0.06em;
+      letter-spacing: -0.065em;
     }
 
-    .section-note {
+    .page-note {
       color: var(--muted);
-      max-width: 470px;
-    }
-
-    .story-panel {
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.035)),
-        radial-gradient(circle at top left, rgba(127,147,168,0.18), transparent 28rem);
-      padding: clamp(24px, 5vw, 46px);
-      box-shadow: var(--shadow);
-    }
-
-    .story-panel p {
-      color: var(--muted);
-      max-width: 850px;
-      font-size: 1.05rem;
-      margin-top: 18px;
+      max-width: 620px;
+      margin-top: 10px;
+      font-size: 0.98rem;
     }
 
     .collection-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 22px;
+      gap: 18px;
+      padding-bottom: 44px;
     }
 
     .collection-card {
       border: 1px solid var(--border);
-      border-radius: 30px;
-      background: rgba(18, 27, 37, 0.82);
+      border-radius: 26px;
+      background: var(--panel);
       overflow: hidden;
-      box-shadow: 0 16px 55px rgba(0, 0, 0, 0.22);
+      box-shadow: var(--shadow);
     }
 
     .card-images {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(145deg, rgba(127,147,168,0.08), rgba(34,48,63,0.22)), #121b25;
+      background: #0f151d;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
     .image-slot {
-      min-height: 340px;
-      padding: 22px;
-      display: grid;
-      place-items: center;
-      position: relative;
+      padding: 0;
+      margin: 0;
+      min-height: 390px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(216,146,58,0.04), rgba(255,255,255,0));
     }
 
     .image-slot + .image-slot {
-      border-left: 1px solid var(--border);
-    }
-
-    .image-slot::before {
-      content: "";
-      position: absolute;
-      width: 210px;
-      height: 210px;
-      border-radius: 999px;
-      background: rgba(216, 195, 138, 0.1);
-      filter: blur(34px);
+      border-left: 1px solid rgba(255,255,255,0.08);
     }
 
     .image-slot img {
-      position: relative;
-      z-index: 1;
-      max-height: 430px;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
-      filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.36));
     }
 
     .card-body {
-      padding: 24px 28px 28px;
+      padding: 14px 18px 18px;
     }
 
     .tags {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 18px;
-      min-height: 34px;
+      margin-bottom: 12px;
+      min-height: 28px;
       align-items: flex-start;
     }
 
     .tag {
-      font-size: 0.78rem;
-      color: #f0c482;
-      background: rgba(216, 160, 79, 0.08);
-      border: 1px solid rgba(216, 160, 79, 0.2);
-      padding: 7px 11px;
+      font-size: 0.74rem;
+      color: #f1be75;
+      background: rgba(216, 146, 58, 0.08);
+      border: 1px solid rgba(216, 146, 58, 0.18);
+      padding: 6px 10px;
       border-radius: 999px;
       white-space: nowrap;
     }
 
     .meta-line {
-      color: var(--faint);
-      font-size: 0.9rem;
-      margin-bottom: 14px;
+      color: #c38a42;
+      font-size: 0.92rem;
+      margin-bottom: 10px;
       letter-spacing: 0.01em;
     }
 
     .title-top {
       color: var(--muted);
-      font-size: 0.97rem;
-      letter-spacing: 0.02em;
-      margin-bottom: 4px;
+      font-size: 0.98rem;
+      letter-spacing: 0.01em;
+      margin-bottom: 3px;
     }
 
     .title-middle {
-      font-size: 1.2rem;
+      font-size: 1.18rem;
       font-weight: 700;
       letter-spacing: -0.03em;
       margin-bottom: 4px;
     }
 
     .title-bottom {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-size: clamp(1.45rem, 2.8vw, 1.95rem);
       font-weight: 850;
       line-height: 1.02;
       letter-spacing: -0.05em;
-      color: #f2a64f;
-      margin-bottom: 16px;
+      color: #ef8e1e;
+      margin-bottom: 12px;
     }
 
     .caption {
-      color: #d49b52;
-      font-size: 1.05rem;
-      max-width: 900px;
+      color: #d98b39;
+      font-size: 0.98rem;
+      max-width: 920px;
     }
 
     footer {
-      padding: 44px 0 54px;
+      padding: 24px 0 40px;
       color: var(--faint);
       border-top: 1px solid var(--border);
-      margin-top: 36px;
+      font-size: 0.9rem;
     }
 
-    @media (max-width: 980px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .section-header {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .featured-images,
+    @media (max-width: 860px) {
       .card-images {
         grid-template-columns: 1fr;
       }
 
       .image-slot + .image-slot {
         border-left: none;
-        border-top: 1px solid var(--border);
+        border-top: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .image-slot {
+        min-height: 320px;
       }
     }
 
     @media (max-width: 640px) {
       .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
+        padding: 14px 0;
+      }
+
+      .brand {
+        gap: 12px;
+      }
+
+      .brand-avatar {
+        width: 50px;
+        height: 50px;
+      }
+
+      .brand-name {
+        font-size: 0.92rem;
+      }
+
+      .brand-sub {
+        font-size: 0.74rem;
+      }
+
+      .page-header {
+        padding: 28px 0 18px;
       }
 
       .card-body {
-        padding: 20px;
+        padding: 14px 14px 16px;
       }
 
       .image-slot {
         min-height: 260px;
-        padding: 16px;
       }
     }
   </style>
@@ -438,65 +316,34 @@
 <body>
   <nav class="nav">
     <div class="nav-inner">
-      <a class="brand" href="#top" aria-label="Home">
-        <span class="brand-mark">ESC</span>
-        <span class="brand-name">Edition Sports Cards</span>
+      <a
+        class="brand"
+        href="https://www.instagram.com/editionsportscards/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="@editionsportscards on Instagram"
+      >
+        <span class="brand-avatar">
+          <span class="brand-avatar-inner">ESC</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">@editionsportscards</span>
+          <span class="brand-sub">Instagram</span>
+        </span>
       </a>
-
-      <div class="nav-links">
-        <a href="#collection">Collection</a>
-        <a href="#about">About</a>
-      </div>
     </div>
   </nav>
 
-  <main id="top" class="site-shell">
-    <section class="hero">
-      <div>
-        <div class="eyebrow">Edition Sports Cards archive</div>
-        <h1>A curated archive for serious hockey cardboard.</h1>
-        <p class="hero-copy">
-          Edition Sports Cards is a personal showcase for rare hockey pieces, grails, true rookies,
-          flagship parallels, one-of-ones, and the stories that make certain cards feel bigger than cardboard.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#collection">View Collection</a>
-          <a class="btn" href="#about">About the Collection</a>
-        </div>
-      </div>
+  <main class="site-shell">
+    <header class="page-header">
+      <div class="page-kicker">Personal collection archive</div>
+      <h1>Connor McDavid Collection</h1>
+      <p class="page-note">
+        A focused archive of flagship rookies, rare parallels, true one-of-ones, and key McDavid pieces.
+      </p>
+    </header>
 
-      <div class="featured-panel" id="featuredPanel"></div>
-    </section>
-
-    <section class="section" id="collection">
-      <div class="section-header">
-        <div>
-          <div class="section-kicker">The archive</div>
-          <h2>Collection gallery</h2>
-        </div>
-        <p class="section-note">
-          Front and back scans for each card, with collector tags and short captions.
-        </p>
-      </div>
-
-      <div class="collection-grid" id="collectionGrid"></div>
-    </section>
-
-    <section class="section" id="about">
-      <div class="story-panel">
-        <div class="section-kicker">Collection philosophy</div>
-        <h2>A personal museum for cards with weight.</h2>
-        <p>
-          Edition Sports Cards is built around scarcity, condition, player significance, and emotional pull.
-          Some cards matter because they are rare. Some matter because they represent the cleanest version of an
-          iconic rookie. Some matter because they capture one of the greatest peaks ever reached by the player.
-        </p>
-        <p>
-          The goal is not to own everything. The goal is to document the cards that feel like artifacts:
-          grails, 1/1s, flagship rookies, elite parallels, and pieces that deserve to be preserved properly.
-        </p>
-      </div>
-    </section>
+    <section class="collection-grid" id="collectionGrid"></section>
   </main>
 
   <footer>
@@ -518,8 +365,7 @@
         grade: "BGS 9",
         serial: "7/10",
         tag: "True RC, Flagship",
-        caption: "The rarest parallel of McDavid's iconic flagship rookie card",
-        featured: false
+        caption: "The rarest parallel of McDavid's iconic flagship rookie card"
       },
       {
         id: 2,
@@ -532,8 +378,7 @@
         grade: "PSA 10 Auto 10",
         serial: "15/25",
         tag: "True RC",
-        caption: "The best copy of his true gold refractor rookie card",
-        featured: false
+        caption: "The best copy of his true gold refractor rookie card"
       },
       {
         id: 3,
@@ -546,8 +391,7 @@
         grade: "PSA 9",
         serial: "1/1",
         tag: "Flagship",
-        caption: "McDavid's 2nd ever flagship 1/1 parallel",
-        featured: true
+        caption: "McDavid's 2nd ever flagship 1/1 parallel"
       },
       {
         id: 4,
@@ -560,8 +404,7 @@
         grade: "CSG 9.5",
         serial: "1/1",
         tag: "",
-        caption: "McDavid's 3rd ever true Golden Treasures from O-Pee-Chee Platinum",
-        featured: false
+        caption: "McDavid's 3rd ever true Golden Treasures from O-Pee-Chee Platinum"
       },
       {
         id: 5,
@@ -574,13 +417,10 @@
         grade: "PSA 10",
         serial: "1/1",
         tag: "MVP Year",
-        caption: "The Golden Treasures from McDavid's historic 2022-23 season where he had 153 points and led the league in both goals & assists",
-        featured: false
+        caption: "The Golden Treasures from McDavid's historic 2022-23 season where he had 153 points and led the league in both goals & assists"
       }
     ];
 
-    const featuredCard = cards.find(card => card.featured) || cards[0];
-    const featuredPanel = document.getElementById("featuredPanel");
     const collectionGrid = document.getElementById("collectionGrid");
 
     function getTags(tagString) {
@@ -594,28 +434,6 @@
         <div class="tags">
           ${tags.map(tag => `<span class="tag">${tag}</span>`).join("")}
         </div>
-      `;
-    }
-
-    function renderFeaturedCard(card) {
-      const tags = getTags(card.tag);
-
-      featuredPanel.innerHTML = `
-        <div class="featured-label">Featured grail</div>
-        <div class="featured-images">
-          <div class="featured-image-frame">
-            <img src="${card.frontImage}" alt="${card.player} ${card.cardName} front" />
-          </div>
-          <div class="featured-image-frame">
-            <img src="${card.backImage}" alt="${card.player} ${card.cardName} back" />
-          </div>
-        </div>
-        ${renderTags(tags)}
-        <div class="meta-line">${card.grade} • ${card.serial}</div>
-        <div class="title-top">${card.year} ${card.setName}</div>
-        <div class="title-middle">${card.player}</div>
-        <div class="title-bottom">${card.cardName}</div>
-        <p class="caption">${card.caption}</p>
       `;
     }
 
@@ -647,7 +465,6 @@
       }).join("");
     }
 
-    renderFeaturedCard(featuredCard);
     renderCards();
   </script>
 </body>
