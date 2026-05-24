@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edition Sports Cards</title>
+  <style>
+    :root {
+      --bg: #0f1822;
+      --bg-soft: #172331;
+      --panel: rgba(255, 255, 255, 0.055);
+      --panel-strong: rgba(255, 255, 255, 0.095);
+      --text: #f4f7fb;
+      --muted: #aeb8c4;
+      --faint: #6f7d8d;
+      --red: #8fa3b8;
+      --red-soft: rgba(143, 163, 184, 0.18);
+      --gold: #d8c38a;
+      --blue: #7f93a8;
+      --border: rgba(214, 224, 235, 0.14);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(124, 145, 164, 0.22), transparent 32rem),
+        radial-gradient(circle at top right, rgba(45, 63, 81, 0.34), transparent 34rem),
+        linear-gradient(180deg, #101a25 0%, #172331 48%, #0b1119 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select {
+      font: inherit;
+    }
+
+    .site-shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(22px);
+      background: rgba(15, 24, 34, 0.82);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #5f7387, #1f2d3c);
+      box-shadow: 0 0 34px rgba(143, 163, 184, 0.28);
+    }
+
+    .brand span:last-child {
+      font-size: 1.05rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .nav-links a {
+      padding: 9px 12px;
+      border-radius: 999px;
+      transition: 180ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero {
+      padding: 74px 0 42px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 12px;
+      border: 1px solid rgba(216, 195, 138, 0.24);
+      color: var(--gold);
+      background: rgba(216, 195, 138, 0.075);
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6.4rem);
+      line-height: 0.9;
+      letter-spacing: -0.075em;
+      max-width: 780px;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      font-size: 1.12rem;
+      max-width: 680px;
+      margin-top: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      padding: 12px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 750;
+      transition: 180ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.13);
+    }
+
+    .btn-primary {
+      border-color: rgba(143, 163, 184, 0.55);
+      background: linear-gradient(135deg, #617588, #253546);
+      box-shadow: 0 18px 45px rgba(31, 45, 60, 0.34);
+    }
+
+    .hero-card-stack {
+      position: relative;
+      min-height: 470px;
+      display: grid;
+      place-items: center;
+    }
+
+    .glow-orb {
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(216, 195, 138, 0.24), rgba(126, 145, 163, 0.16), transparent 68%);
+      filter: blur(12px);
+      opacity: 0.9;
+    }
+
+    .featured-slab {
+      position: relative;
+      width: min(330px, 82vw);
+      padding: 16px;
+      border-radius: 32px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.055));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: var(--shadow), inset 0 0 50px rgba(255, 255, 255, 0.035);
+      transform: rotate(2deg);
+    }
+
+    .slab-label {
+      height: 58px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      margin-bottom: 14px;
+      font-size: 0.76rem;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+    }
+
+    .grade {
+      font-size: 1.45rem;
+      color: #111;
+    }
+
+    .card-art-placeholder {
+      aspect-ratio: 0.72;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02)),
+        radial-gradient(circle at 50% 30%, rgba(216,195,138,0.34), transparent 26%),
+        linear-gradient(145deg, #253545, #121b25 60%, #0b1119);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .card-art-placeholder strong {
+      display: block;
+      font-size: 1.25rem;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .card-art-placeholder span {
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 0.9rem;
+    }
+
+    .section {
+      padding: 54px 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .section-kicker {
+      color: var(--gold);
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.35rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .section-note {
+      color: var(--muted);
+      max-width: 430px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .stat-card {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 0 14px 45px rgba(0, 0, 0, 0.18);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -0.07em;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 190px 190px;
+      gap: 12px;
+      margin: 26px 0;
+    }
+
+    .control {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--text);
+      padding: 13px 14px;
+      border-radius: 15px;
+      outline: none;
+    }
+
+    select.control option {
+      background: #11131a;
+      color: #fff;
+    }
+
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .collection-card {
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: var(--panel);
+      overflow: hidden;
+      cursor: pointer;
+      transition: 200ms ease;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .collection-card:hover {
+      transform: translateY(-5px);
+      background: var(--panel-strong);
+      border-color: rgba(255, 255, 255, 0.22);
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.32);
+    }
+
+    .thumb {
+      aspect-ratio: 1 / 0.86;
+      background: linear-gradient(145deg, rgba(127,147,168,0.22), rgba(34,48,63,0.32)), #121b25;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .thumb::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      background: rgba(216, 195, 138, 0.16);
+      filter: blur(30px);
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+    }
+
+    .thumb-placeholder {
+      position: relative;
+      z-index: 1;
+      color: rgba(255, 255, 255, 0.68);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .card-body {
+      padding: 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      font-size: 0.74rem;
+      color: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 5px 8px;
+      border-radius: 999px;
+    }
+
+    .tag.grail { background: rgba(216, 195, 138, 0.14); color: var(--gold); border-color: rgba(216, 195, 138, 0.22); }
+    .tag.apex { background: rgba(143, 163, 184, 0.13); color: #d8e4ef; border-color: rgba(143, 163, 184, 0.25); }
+    .tag.wishlist { background: rgba(110, 168, 255, 0.13); color: #b9d4ff; border-color: rgba(110, 168, 255, 0.24); }
+
+    .card-title {
+      font-size: 1.12rem;
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+      margin-bottom: 8px;
+    }
+
+    .card-meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+
+    .card-note {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: auto;
+    }
+
+    .story-panel {
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.035)),
+        radial-gradient(circle at top left, rgba(127,147,168,0.18), transparent 28rem);
+      padding: clamp(24px, 5vw, 46px);
+      box-shadow: var(--shadow);
+    }
+
+    .story-panel p {
+      color: var(--muted);
+      max-width: 850px;
+      font-size: 1.05rem;
+      margin-top: 18px;
+    }
+
+    .wishlist-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .wishlist-item {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--panel);
+    }
+
+    .wishlist-item strong {
+      display: block;
+      letter-spacing: -0.035em;
+      margin-bottom: 5px;
+    }
+
+    .wishlist-item span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer {
+      padding: 42px 0;
+      color: var(--faint);
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.76);
+      backdrop-filter: blur(14px);
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal {
+      width: min(920px, 100%);
+      max-height: 88vh;
+      overflow: auto;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: #10121a;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+
+    .modal-image {
+      min-height: 460px;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(216,195,138,0.2), transparent 28%),
+        linear-gradient(145deg, #1a2633, #0c121a);
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      border-right: 1px solid var(--border);
+    }
+
+    .modal-image img {
+      max-width: 100%;
+      max-height: 520px;
+      object-fit: contain;
+    }
+
+    .modal-content {
+      padding: 30px;
+    }
+
+    .modal-close {
+      float: right;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 1.25rem;
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .detail-row span:first-child {
+      color: var(--muted);
+    }
+
+    .detail-row span:last-child {
+      font-weight: 750;
+      text-align: right;
+    }
+
+    .empty-state {
+      display: none;
+      color: var(--muted);
+      padding: 26px;
+      border: 1px dashed var(--border);
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .modal {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card-stack {
+        min-height: 390px;
+      }
+
+      .stats-grid,
+      .collection-grid,
+      .wishlist-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-image {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        min-height: 340px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .nav-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+      }
+
+      .stats-grid,
+      .collection-grid,
+      .wishlist-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Home">
+        <span class="brand-mark">ESC</span>
+        <span>Edition Sports Cards</span>
+      </a>
+      <div class="nav-links">
+        <a href="#collection">Collection</a>
+        <a href="#story">Philosophy</a>
+        <a href="#wishlist">Wishlist</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top" class="site-shell">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Edition Sports Cards archive</div>
+        <h1>A curated archive for serious hockey cardboard.</h1>
+        <p class="hero-copy">
+          Edition Sports Cards is a personal showcase for rare hockey pieces, grails, 1/1s,
+          graded gems, and the stories that make certain cards feel bigger than cardboard.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#collection">View Collection</a>
+          <a class="btn" href="#wishlist">See Wishlist</a>
+        </div>
+      </div>
+
+      <div class="hero-card-stack" aria-hidden="true">
+        <div class="glow-orb"></div>
+        <div class="featured-slab">
+          <div class="slab-label">
+            <span>FEATURED GRAIL</span>
+            <span class="grade">10</span>
+          </div>
+          <div class="card-art-placeholder">
+            <div>
+              <strong>Connor McDavid</strong>
+              <span>Replace this block with your favourite slab photo.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Collection statistics">
+      <div class="stats-grid" id="statsGrid"></div>
+    </section>
+
+    <section class="section" id="collection">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">The archive</div>
+          <h2>Collection gallery</h2>
+        </div>
+        <p class="section-note">
+          Search, filter, and click any card to open a detail view. Edit the card data in the JavaScript section near the bottom of this file.
+        </p>
+      </div>
+
+      <div class="controls">
+        <input id="searchInput" class="control" type="search" placeholder="Search by player, set, year, note..." />
+        <select id="tierFilter" class="control">
+          <option value="all">All tiers</option>
+        </select>
+        <select id="sortSelect" class="control">
+          <option value="tier">Sort: Tier</option>
+          <option value="year-desc">Sort: Newest year</option>
+          <option value="year-asc">Sort: Oldest year</option>
+          <option value="player">Sort: Player</option>
+        </select>
+      </div>
+
+      <div class="collection-grid" id="collectionGrid"></div>
+      <div class="empty-state" id="emptyState">No cards match those filters yet.</div>
+    </section>
+
+    <section class="section" id="story">
+      <div class="story-panel">
+        <div class="section-kicker">Collection philosophy</div>
+        <h2>A personal museum for cards with weight.</h2>
+        <p>
+          Edition Sports Cards is built around scarcity, condition, player significance, and emotional pull.
+          Some cards matter because they are rare. Some matter because they capture a season, a chase,
+          or a player becoming undeniable.
+        </p>
+        <p>
+          The goal is not to own everything. The goal is to document the cards that feel like artifacts:
+          grails, 1/1s, rare parallels, flagship rookies, and pieces with a story worth preserving.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="wishlist">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Future targets</div>
+          <h2>Wishlist</h2>
+        </div>
+        <p class="section-note">A simple place to track cards you want without turning the site into a marketplace.</p>
+      </div>
+      <div class="wishlist-grid" id="wishlistGrid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="site-shell">
+      Edition Sports Cards — personal collection archive. Not affiliated with any league, team, player, or card manufacturer.
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-image" id="modalImage"></div>
+      <div class="modal-content">
+        <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+        <div class="tags" id="modalTags"></div>
+        <h2 id="modalTitle"></h2>
+        <p class="card-meta" id="modalMeta"></p>
+        <div class="detail-list" id="modalDetails"></div>
+        <p class="card-note" id="modalStory"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================
+    // EDIT YOUR COLLECTION HERE
+    // Replace image paths with files like: images/mcdavid-young-guns.jpg
+    // Leave image as "" to keep the placeholder design.
+    // =========================================================
+
+    const cards = [
+      {
+        id: 1,
+        player: "Connor McDavid",
+        title: "2015-16 Upper Deck Young Guns Rookie",
+        year: 2015,
+        set: "Upper Deck Series 1",
+        grade: "PSA 10",
+        serial: "N/A",
+        tier: "Grail",
+        category: "Rookie",
+        image: "",
+        note: "The cornerstone modern hockey card. The kind of piece the whole collection can orbit around.",
+        story: "This is where the McDavid collection becomes serious. Replace this with the story of how you acquired it, what you paid, why it matters, and where it fits in the collection."
+      },
+      {
+        id: 2,
+        player: "Connor McDavid",
+        title: "2015-16 The Cup RPA",
+        year: 2015,
+        set: "Upper Deck The Cup",
+        grade: "Raw / TBD",
+        serial: "/99",
+        tier: "Grail",
+        category: "Patch Auto",
+        image: "",
+        note: "The dream-tier McDavid card. Add your real copy or keep this as a target card.",
+        story: "A Cup RPA has a different aura: rookie-year, patch, autograph, scarcity, and flagship prestige all in one object."
+      },
+      {
+        id: 3,
+        player: "Connor McDavid",
+        title: "SP Authentic Future Watch Auto",
+        year: 2015,
+        set: "SP Authentic",
+        grade: "BGS 9.5",
+        serial: "/999",
+        tier: "Apex",
+        category: "Auto",
+        image: "",
+        note: "A clean flagship auto with long-term hobby relevance.",
+        story: "Future Watch Autos feel like one of the cleanest ways to represent a player's rookie-year autograph."
+      },
+      {
+        id: 4,
+        player: "Leon Draisaitl",
+        title: "2014-15 Upper Deck Young Guns Rookie",
+        year: 2014,
+        set: "Upper Deck Series 1",
+        grade: "PSA 10",
+        serial: "N/A",
+        tier: "Cornerstone",
+        category: "Rookie",
+        image: "",
+        note: "Era-relevant Oilers piece and natural companion to the McDavid core.",
+        story: "Draisaitl is part of the emotional context around the Oilers era and belongs beside the McDavid narrative."
+      },
+      {
+        id: 5,
+        player: "Sidney Crosby",
+        title: "2005-06 Upper Deck Young Guns Rookie",
+        year: 2005,
+        set: "Upper Deck Series 1",
+        grade: "PSA 10",
+        serial: "N/A",
+        tier: "Apex",
+        category: "Rookie",
+        image: "",
+        note: "Modern hobby pillar and natural comparison point for McDavid cards.",
+        story: "Crosby adds historical context. Even in a McDavid-focused collection, certain cards matter because they define the era around him."
+      },
+      {
+        id: 6,
+        player: "Nathan MacKinnon",
+        title: "2013-14 Upper Deck Young Guns Rookie",
+        year: 2013,
+        set: "Upper Deck Series 1",
+        grade: "PSA 10",
+        serial: "N/A",
+        tier: "Era Relevant",
+        category: "Rookie",
+        image: "",
+        note: "A major card from McDavid's competitive era.",
+        story: "MacKinnon belongs in the wider story of modern NHL greatness."
+      }
+    ];
+
+    const wishlist = [
+      {
+        title: "Connor McDavid Exquisite Rookie Patch Auto",
+        note: "Dream target. Premium, scarce, and visually perfect for a grail shelf."
+      },
+      {
+        title: "McDavid High Gloss Young Guns /10",
+        note: "A true endgame version of the flagship rookie."
+      },
+      {
+        title: "McDavid Cup RPA with premium patch",
+        note: "Patch quality matters. Wait for a copy that feels special."
+      }
+    ];
+
+    const tierOrder = ["Grail", "Apex", "Cornerstone", "Era Relevant", "Personal Favourite", "Wishlist"];
+
+    const collectionGrid = document.getElementById("collectionGrid");
+    const statsGrid = document.getElementById("statsGrid");
+    const wishlistGrid = document.getElementById("wishlistGrid");
+    const searchInput = document.getElementById("searchInput");
+    const tierFilter = document.getElementById("tierFilter");
+    const sortSelect = document.getElementById("sortSelect");
+    const emptyState = document.getElementById("emptyState");
+
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const modalClose = document.getElementById("modalClose");
+    const modalImage = document.getElementById("modalImage");
+    const modalTags = document.getElementById("modalTags");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalMeta = document.getElementById("modalMeta");
+    const modalDetails = document.getElementById("modalDetails");
+    const modalStory = document.getElementById("modalStory");
+
+    function tagClass(tier) {
+      const normalized = tier.toLowerCase().replace(/\s+/g, "-");
+      if (normalized.includes("grail")) return "grail";
+      if (normalized.includes("apex")) return "apex";
+      if (normalized.includes("wishlist")) return "wishlist";
+      return "";
+    }
+
+    function renderStats() {
+      const graded = cards.filter(card => card.grade && card.grade.toLowerCase() !== "raw / tbd").length;
+      const mcdavid = cards.filter(card => card.player.toLowerCase().includes("mcdavid")).length;
+      const rookies = cards.filter(card => card.category.toLowerCase().includes("rookie")).length;
+
+      const stats = [
+        { value: cards.length, label: "Cards archived" },
+        { value: mcdavid, label: "McDavid pieces" },
+        { value: graded, label: "Graded cards" },
+        { value: rookies, label: "Rookies" }
+      ];
+
+      statsGrid.innerHTML = stats.map(stat => `
+        <div class="stat-card">
+          <div class="stat-value">${stat.value}</div>
+          <div class="stat-label">${stat.label}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderTierOptions() {
+      const tiers = [...new Set(cards.map(card => card.tier))];
+      tierFilter.innerHTML = `<option value="all">All tiers</option>` + tiers.map(tier => `<option value="${tier}">${tier}</option>`).join("");
+    }
+
+    function sortCards(cardList) {
+      const sort = sortSelect.value;
+      return [...cardList].sort((a, b) => {
+        if (sort === "year-desc") return b.year - a.year;
+        if (sort === "year-asc") return a.year - b.year;
+        if (sort === "player") return a.player.localeCompare(b.player);
+        return tierOrder.indexOf(a.tier) - tierOrder.indexOf(b.tier);
+      });
+    }
+
+    function renderCards() {
+      const query = searchInput.value.trim().toLowerCase();
+      const tier = tierFilter.value;
+
+      const filtered = cards.filter(card => {
+        const haystack = `${card.player} ${card.title} ${card.year} ${card.set} ${card.grade} ${card.tier} ${card.category} ${card.note}`.toLowerCase();
+        const matchesQuery = !query || haystack.includes(query);
+        const matchesTier = tier === "all" || card.tier === tier;
+        return matchesQuery && matchesTier;
+      });
+
+      const sorted = sortCards(filtered);
+
+      collectionGrid.innerHTML = sorted.map(card => `
+        <article class="collection-card" tabindex="0" role="button" aria-label="Open ${card.title}" data-id="${card.id}">
+          <div class="thumb">
+            ${card.image ? `<img src="${card.image}" alt="${card.title}" />` : `<div class="thumb-placeholder">${card.player}<br>${card.year}</div>`}
+          </div>
+          <div class="card-body">
+            <div class="tags">
+              <span class="tag ${tagClass(card.tier)}">${card.tier}</span>
+              <span class="tag">${card.category}</span>
+            </div>
+            <h3 class="card-title">${card.title}</h3>
+            <p class="card-meta">${card.grade} · ${card.serial}</p>
+            <p class="card-note">${card.note}</p>
+          </div>
+        </article>
+      `).join("");
+
+      emptyState.style.display = sorted.length ? "none" : "block";
+
+      document.querySelectorAll(".collection-card").forEach(cardElement => {
+        cardElement.addEventListener("click", () => openModal(Number(cardElement.dataset.id)));
+        cardElement.addEventListener("keydown", event => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openModal(Number(cardElement.dataset.id));
+          }
+        });
+      });
+    }
+
+    function renderWishlist() {
+      wishlistGrid.innerHTML = wishlist.map(item => `
+        <div class="wishlist-item">
+          <strong>${item.title}</strong>
+          <span>${item.note}</span>
+        </div>
+      `).join("");
+    }
+
+    function openModal(id) {
+      const card = cards.find(item => item.id === id);
+      if (!card) return;
+
+      modalImage.innerHTML = card.image
+        ? `<img src="${card.image}" alt="${card.title}" />`
+        : `<div class="card-art-placeholder" style="width:min(280px,100%);"><div><strong>${card.player}</strong><span>${card.title}</span></div></div>`;
+
+      modalTags.innerHTML = `
+        <span class="tag ${tagClass(card.tier)}">${card.tier}</span>
+        <span class="tag">${card.category}</span>
+      `;
+      modalTitle.textContent = card.title;
+      modalMeta.textContent = `${card.player} · ${card.set}`;
+      modalDetails.innerHTML = [
+        ["Player", card.player],
+        ["Year", card.year],
+        ["Set", card.set],
+        ["Grade", card.grade],
+        ["Serial", card.serial],
+        ["Tier", card.tier]
+      ].map(([label, value]) => `
+        <div class="detail-row"><span>${label}</span><span>${value}</span></div>
+      `).join("");
+      modalStory.textContent = card.story;
+
+      modalBackdrop.classList.add("active");
+      modalBackdrop.setAttribute("aria-hidden", "false");
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.remove("active");
+      modalBackdrop.setAttribute("aria-hidden", "true");
+    }
+
+    searchInput.addEventListener("input", renderCards);
+    tierFilter.addEventListener("change", renderCards);
+    sortSelect.addEventListener("change", renderCards);
+    modalClose.addEventListener("click", closeModal);
+    modalBackdrop.addEventListener("click", event => {
+      if (event.target === modalBackdrop) closeModal();
+    });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeModal();
+    });
+
+    renderStats();
+    renderTierOptions();
+    renderCards();
+    renderWishlist();
+  </script>
+</body>
+</html>
